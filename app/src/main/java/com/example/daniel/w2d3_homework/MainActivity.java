@@ -1,6 +1,10 @@
 package com.example.daniel.w2d3_homework;
 
-import android.support.v4.app.Fragment;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
     FragmentManager manager;
 
+    private MusicService musicService;
+
+    boolean musicBind;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,18 @@ public class MainActivity extends AppCompatActivity {
         manager.findFragmentById(R.id.activity_main);
 
     }
+
+    ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            musicService = ((MusicService.MusicBinder) service).getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            musicService = null;
+        }
+    };
 
     public void playMusic(View view) {
         MusicPlayerFragment music = new MusicPlayerFragment();
@@ -44,5 +64,18 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.me_framLinear, download)
                 .commit();
 
+    }
+
+    public void doBindService(){
+        bindService(new Intent(MainActivity.this, MusicService.class),
+                serviceConnection,
+                Context.BIND_AUTO_CREATE);
+    }
+
+    public void doUnbindService(){
+        if(musicBind){
+            unbindService(serviceConnection);
+            musicBind = false;
+        }
     }
 }

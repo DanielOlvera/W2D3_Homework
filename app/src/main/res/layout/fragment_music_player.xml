@@ -31,7 +31,6 @@
             android:id="@+id/fm_muscPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="playMusic"
             android:text="Play"
             android:layout_weight="0.47" />
 
@@ -39,7 +38,6 @@
             android:id="@+id/fm_muscStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="stopMusic"
             android:text="Stop"
             android:layout_weight="0.50" />
     </LinearLayout>

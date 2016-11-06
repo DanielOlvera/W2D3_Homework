@@ -2,6 +2,7 @@ package com.example.daniel.w2d3_homework;
 
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -51,7 +52,6 @@ public class MusicPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        Intent intent = new Intent(this, MusicService.class);
 
         return inflater.inflate(R.layout.fragment_music_player, container, false);
     }
@@ -66,6 +66,26 @@ public class MusicPlayerFragment extends Fragment {
 
         muscTxtV.setText("Music Player");
 
+        musicPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                musicService.playMusic();
+            }
+        });
+
+        musicStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                musicService.stopMusic();
+            }
+        });
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        doUnbindService();
     }
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
@@ -83,4 +103,19 @@ public class MusicPlayerFragment extends Fragment {
             Log.d(TAG, "onServiceDisconnected: ");
         }
     };
+
+    public void doBindService(){
+        getActivity().bindService(new Intent(getActivity(), MusicService.class),
+                serviceConnection,
+                Context.BIND_AUTO_CREATE);
+    }
+
+    public void doUnbindService() {
+        if (musicBound) {
+            // Detach our existing connection.
+            getActivity().unbindService(serviceConnection);
+            musicBound = false;
+        }
+    }
+
 }
