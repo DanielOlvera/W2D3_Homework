@@ -1,19 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/downloadFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.daniel.w2d3_homework.DownloadFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/f_dwnld"
+        android:id="@+id/fd_dwnld"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="Hello Download!"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"
         android:textAlignment="center"
         android:textSize="20dp"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/fd_dwnldBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Download File"/>
+
+</LinearLayout>

@@ -1,7 +1,12 @@
 package com.example.daniel.w2d3_homework;
 
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -23,6 +30,10 @@ public class MusicPlayerFragment extends Fragment {
     TextView songName;
     Button musicPlay;
     Button musicStop;
+
+    MusicService musicService;
+
+    boolean musicBound = false;
 
 
     public MusicPlayerFragment() {
@@ -40,6 +51,8 @@ public class MusicPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        Intent intent = new Intent(this, MusicService.class);
+
         return inflater.inflate(R.layout.fragment_music_player, container, false);
     }
 
@@ -52,5 +65,22 @@ public class MusicPlayerFragment extends Fragment {
         musicStop = (Button) getView().findViewById(R.id.fm_muscStop);
 
         muscTxtV.setText("Music Player");
+
     }
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            MusicService.MusicBinder musicBinder = (MusicService.MusicBinder) service;
+            musicService = musicBinder.getService();
+            musicBound = true;
+            Log.d(TAG, "onServiceConnected: ");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            musicBound = false;
+            Log.d(TAG, "onServiceDisconnected: ");
+        }
+    };
 }

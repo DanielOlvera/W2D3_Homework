@@ -3,13 +3,14 @@
     android:id="@+id/musicFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.daniel.w2d3_homework.MusicPlayerFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/f_mscPlyr"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="MusicPlayer"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
@@ -21,16 +22,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/fm_muscPlay"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="playMusic"/>
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <Button
+            android:id="@+id/fm_muscPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playMusic"
+            android:text="Play"
+            android:layout_weight="0.47" />
 
-    <Button
-        android:id="@+id/fm_muscStop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="stopMusic"/>
+        <Button
+            android:id="@+id/fm_muscStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="stopMusic"
+            android:text="Stop"
+            android:layout_weight="0.50" />
+    </LinearLayout>
 
 </LinearLayout>

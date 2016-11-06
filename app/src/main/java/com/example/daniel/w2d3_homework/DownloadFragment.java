@@ -43,7 +43,7 @@ public class DownloadFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "onActivityCreated: ");
-        dwnldTxtV = (TextView) getView().findViewById(R.id.f_dwnld);
+        dwnldTxtV = (TextView) getView().findViewById(R.id.fd_dwnld);
         dwnldTxtV.setText("Download File");
     }
 }
