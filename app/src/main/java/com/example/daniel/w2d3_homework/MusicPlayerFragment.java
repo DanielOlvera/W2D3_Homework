@@ -69,6 +69,7 @@ public class MusicPlayerFragment extends Fragment {
         musicPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "onClick: " + musicPlay);
                 musicService.playMusic();
             }
         });

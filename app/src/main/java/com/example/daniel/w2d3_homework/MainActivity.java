@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         manager = getSupportFragmentManager();
         manager.findFragmentById(R.id.activity_main);
+
+        doBindService();
 
     }
 
@@ -78,4 +83,16 @@ public class MainActivity extends AppCompatActivity {
             musicBind = false;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        doUnbindService();
+    }
 }
+
+/*
+Reference:
+    https://developer.android.com/reference/android/os/AsyncTask.html
+    http://stackoverflow.com/questions/3028306/download-a-file-with-android-and-showing-the-progress-in-a-progressdialog
+ */
