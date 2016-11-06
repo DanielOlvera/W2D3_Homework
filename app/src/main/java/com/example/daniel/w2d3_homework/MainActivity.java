@@ -90,7 +90,18 @@ public class MainActivity extends AppCompatActivity {
         doUnbindService();
     }
 }
-
+/*
+Theoretical tasks:
+    What databases do you use in Android?
+        - SQLite 3 has a full support in Android, however you could use other DB by connecting with a web service,
+        and to the data mapping with an ORM like Sugar, GreenDAO or Realm
+    What is a Looper??
+        - Is a class which is used to execut multiple messages (Runnables) in a queue. Is someone wants
+        to execute multiple messages. There are two ways to start a Thread: by implementing Runnable or by
+        extending Thread.
+    What is a Handler?
+        - Allows you to send and process messages and runnable objects assocciated with ThreadsMessageQueue
+ */
 /*
 Reference:
     https://developer.android.com/reference/android/os/AsyncTask.html
